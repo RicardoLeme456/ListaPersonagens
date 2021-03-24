@@ -2,6 +2,7 @@ package com.example.listapersonagens.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.listapersonagens.R;
+import com.example.listapersonagens.dao.PersonagemDAO;
 import com.example.listapersonagens.model.Personagem;
 
 public class FormularioPersonagemActivity extends AppCompatActivity {
@@ -17,6 +19,9 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_personagem);
+
+        PersonagemDAO dao = new PersonagemDAO();
+
 
         EditText campoNome = findViewById(R.id.editText_nome);
         EditText campoAltura = findViewById(R.id.editText_altura);
@@ -33,11 +38,15 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
 
                 Personagem persoangemSalvo = new Personagem(nome, altura, nascimento);
 
-                Toast.makeText(FormularioPersonagemActivity.this, persoangemSalvo.getNome() + " - " + persoangemSalvo.getAltura() + " - " + persoangemSalvo.getNascimento(), Toast.LENGTH_SHORT).show();
+                dao.salva(persoangemSalvo);
+
+                startActivity(new Intent(FormularioPersonagemActivity.this, ListaPersonagemActivity.class));
+
+                //Toast.makeText(FormularioPersonagemActivity.this, persoangemSalvo.getNome() + " - " + persoangemSalvo.getAltura() + " - " + persoangemSalvo.getNascimento(), Toast.LENGTH_SHORT).show();
 
                 new Personagem(nome, nascimento, altura);
 
-                Toast.makeText(FormularioPersonagemActivity.this,"Botão Funcionado", Toast.LENGTH_SHORT).show();
+               //Toast.makeText(FormularioPersonagemActivity.this,"Botão Funcionado", Toast.LENGTH_SHORT).show();
             }
         });
     }
