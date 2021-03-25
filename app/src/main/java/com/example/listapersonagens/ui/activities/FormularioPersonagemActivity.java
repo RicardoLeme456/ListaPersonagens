@@ -46,7 +46,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
 
                 new Personagem(nome, nascimento, altura);
 
-               //Toast.makeText(FormularioPersonagemActivity.this,"Botão Funcionado", Toast.LENGTH_SHORT).show();
+               Toast.makeText(FormularioPersonagemActivity.this,"Botão Funcionado", Toast.LENGTH_SHORT).show();
             }
         });
     }
