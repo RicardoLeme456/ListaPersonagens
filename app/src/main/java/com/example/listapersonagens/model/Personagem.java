@@ -13,6 +13,7 @@ public class Personagem implements Serializable {
 
     public Personagem(String nome, String nascimento, String altura) {
 
+        //Declarando uma variável
         this.nome = nome;
         this.altura = altura;
         this.nascimento = nascimento;
