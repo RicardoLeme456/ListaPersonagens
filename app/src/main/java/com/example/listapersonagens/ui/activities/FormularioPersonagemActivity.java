@@ -13,19 +13,27 @@ import com.example.listapersonagens.R;
 import com.example.listapersonagens.dao.PersonagemDAO;
 import com.example.listapersonagens.model.Personagem;
 
+import java.io.Serializable;
+
+//Onde ocorrem as transações
 public class FormularioPersonagemActivity extends AppCompatActivity {
+
+    private EditText campoNome;
+    private EditText campoNascimento;
+    private EditText campoAltura;
+    private final PersonagemDAO dao = new PersonagemDAO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_personagem);
 
-        PersonagemDAO dao = new PersonagemDAO();
 
 
-        EditText campoNome = findViewById(R.id.editText_nome);
-        EditText campoAltura = findViewById(R.id.editText_altura);
-        EditText campoNascimento = findViewById(R.id.editText_nascimento);
+
+        campoNome = findViewById(R.id.editText_nome);
+        campoAltura = findViewById(R.id.editText_altura);
+        campoNascimento = findViewById(R.id.editText_nascimento);
 
         Button botaoSalvar = findViewById(R.id.button_salvar);
         botaoSalvar.setOnClickListener(new View.OnClickListener() {
@@ -39,14 +47,27 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
                 Personagem persoangemSalvo = new Personagem(nome, altura, nascimento);
 
                 dao.salva(persoangemSalvo);
+                finish();
 
-                startActivity(new Intent(FormularioPersonagemActivity.this, ListaPersonagemActivity.class));
+                //startActivity(new Intent(FormularioPersonagemActivity.this, ListaPersonagemActivity.class));
 
                 //Toast.makeText(FormularioPersonagemActivity.this, persoangemSalvo.getNome() + " - " + persoangemSalvo.getAltura() + " - " + persoangemSalvo.getNascimento(), Toast.LENGTH_SHORT).show();
 
-                new Personagem(nome, nascimento, altura);
+                //new Personagem(nome, nascimento, altura);
 
-               Toast.makeText(FormularioPersonagemActivity.this,"Botão Funcionado", Toast.LENGTH_SHORT).show();
+                persoangemSalvo.setNome(nome);
+                persoangemSalvo.setAltura(altura);
+                persoangemSalvo.setNascimento(nascimento);
+                dao.editar(persoangemSalvo);
+
+                //Toast.makeText(FormularioPersonagemActivity.this,"Botão Funcionado", Toast.LENGTH_SHORT).show();
+
+                Intent dados = getIntent();
+                //Passar os parâmetros que estou buscando
+                Personagem personagem = (Personagem) dados.getSerializableExtra("personagem");
+                campoNome.setText(personagem.getNome());
+                campoNascimento.setText(personagem.getNascimento());
+                campoAltura.setText(personagem.getAltura());
             }
         });
     }
