@@ -15,7 +15,7 @@ import com.example.listapersonagens.model.Personagem;
 
 import java.io.Serializable;
 
-//Onde ocorrem as transações
+//Extender as informações e puxar da Superclasse
 public class FormularioPersonagemActivity extends AppCompatActivity {
 
     private EditText campoNome;
@@ -23,10 +23,12 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     private EditText campoAltura;
     private final PersonagemDAO dao = new PersonagemDAO();
 
+    //Buscar a Superclasse que esta na IDE
     @Override
+    //Buscar as informações da Superclasse
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_formulario_personagem);
+        super.onCreate(savedInstanceState); //Criação da Activity para fazer as ações
+        setContentView(R.layout.activity_formulario_personagem); //Setar um contexto para abrir uma view, tipo o lugar ou a posição especificada que ela vai estar
 
 
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PersonagemDAO {
 
-    private final static List<Personagem> personagens = new ArrayList<>();
+    private final static List<Personagem> personagens = new ArrayList<>(); //Criação de Listagens para os respectivos personagens
     private static int contadorDeId = 1;
 
     public void salva(Personagem persoangemSalvo) {

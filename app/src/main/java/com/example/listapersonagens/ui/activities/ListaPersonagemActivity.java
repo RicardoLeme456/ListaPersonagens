@@ -24,13 +24,14 @@ public class ListaPersonagemActivity extends AppCompatActivity {
     //Mátodo sendo usado somente nessa classe
     private final PersonagemDAO dao = new PersonagemDAO();
 
-    //Criação do Layout
+    //Buscar a Superclasse que esta na IDE
     @Override
+    //Buscar as informações da Superclasse
     protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_personagem);
+        super.onCreate(savedInstanceState); //Criação da Activity
+        setContentView(R.layout.activity_lista_personagem); //Setar um contexto para abrir uma view, tipo o lugar ou a posição especificada que ela vai estar
 
-        //Setando o título
+        //Altera o titulo associado a esta atividade
         setTitle("Lista de Personagens");
         //Evitar de digitar uma listagem de personagens
         dao.salva(new Personagem("Ken", "02101985", "1,80"));
@@ -64,9 +65,9 @@ public class ListaPersonagemActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        ListView listaDePersonagens = findViewById(R.id.activity_main_lista_personagem);
-        List<Personagem> personagens = dao.todos();
-        listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagens));
+        ListView listaDePersonagens = findViewById(R.id.activity_main_lista_personagem); //Exibe uma visualização verticalmmente onde cada visualização é exibido abaixo do anterior
+        List<Personagem> personagens = dao.todos(); //Cria uma listagem ordenada e salva os dados
+        listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagens)); //Define os dados por trás da ListView
 
         listaDePersonagens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
