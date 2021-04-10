@@ -32,20 +32,21 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
 
 
 
-
+        //Pegando as informações
         campoNome = findViewById(R.id.editText_nome);
         campoAltura = findViewById(R.id.editText_altura);
         campoNascimento = findViewById(R.id.editText_nascimento);
 
-        Button botaoSalvar = findViewById(R.id.button_salvar);
-        botaoSalvar.setOnClickListener(new View.OnClickListener() {
+        Button botaoSalvar = findViewById(R.id.button_salvar); //Método usado no lugar do OnClick
+        botaoSalvar.setOnClickListener(new View.OnClickListener() { //Faz uma chamaga para fazer um instanciamento
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View v) { //Criação da Superclasse
+                //Quamdo criar o OnClick ele vai receber as strings
                 String nome = campoNome.getText().toString();
                 String altura = campoAltura.getText().toString();
                 String nascimento = campoNascimento.getText().toString();
 
+                //Armazenar as informações e com isso cria a classe Personagem
                 Personagem persoangemSalvo = new Personagem(nome, altura, nascimento);
 
                 dao.salva(persoangemSalvo);
