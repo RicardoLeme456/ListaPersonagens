@@ -4,7 +4,7 @@ import com.example.listapersonagens.model.Personagem;
 import com.example.listapersonagens.ui.activities.ListaPersonagemActivity;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List; //Importação da lista
 
 
 
@@ -13,11 +13,12 @@ public class PersonagemDAO {
     private final static List<Personagem> personagens = new ArrayList<>(); //Criação de Listagens para os respectivos personagens
     private static int contadorDeId = 1;
 
+    //Peguei as informações
     public void salva(Personagem persoangemSalvo) {
 
         //Local onde o personagem sera salvo
         persoangemSalvo.setId(contadorDeId);
-        personagens.add(persoangemSalvo);
+        personagens.add(persoangemSalvo); //Inputar uma informação
         contadorDeId++;
 
     }
@@ -41,6 +42,7 @@ public class PersonagemDAO {
 
     }
 
+    //Imprimir essa lista no xml
     public List<Personagem> todos(){
        return new ArrayList<>(personagens);
 

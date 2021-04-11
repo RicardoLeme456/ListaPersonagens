@@ -21,7 +21,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     private EditText campoNome;
     private EditText campoNascimento;
     private EditText campoAltura;
-    private final PersonagemDAO dao = new PersonagemDAO();
+    private final PersonagemDAO dao = new PersonagemDAO(); //Criar uma nova classe
 
     //Buscar a Superclasse que esta na IDE
     @Override
@@ -49,6 +49,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
                 //Armazenar as informações e com isso cria a classe Personagem
                 Personagem persoangemSalvo = new Personagem(nome, altura, nascimento);
 
+                //Guardar as informações ou gravar as informações
                 dao.salva(persoangemSalvo);
                 finish();
 
