@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ListaPersonagens">
       <activity android:name=".ui.activities.FormularioPersonagemActivity"/> //Criado o Activity FormularioPersonagemActivity
-        <activity android:name=".ui.activities.ListaPersonagemActivity">
+        <activity android:name=".ui.activities.ListaPersonagemActivity"> //Aprimeira coisa a aparecer
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" /> //uma ação a ser colocada
 

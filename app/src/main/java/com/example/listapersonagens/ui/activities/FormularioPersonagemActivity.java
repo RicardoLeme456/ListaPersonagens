@@ -29,7 +29,8 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); //Criação da Activity para fazer as ações
         setContentView(R.layout.activity_formulario_personagem); //Setar um contexto para abrir uma view, tipo o lugar ou a posição especificada que ela vai estar
-
+        //Definir o titulo associado a esta atividade no cabeçalho
+        setTitle("Formulário de Personagen");
 
 
         //Pegando as informações

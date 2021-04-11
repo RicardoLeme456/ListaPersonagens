@@ -31,7 +31,7 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState); //Criação da Activity
         setContentView(R.layout.activity_lista_personagem); //Setar um contexto para abrir uma view, tipo o lugar ou a posição especificada que ela vai estar
 
-        //Altera o titulo associado a esta atividade
+        //Definir o titulo associado a esta atividade no cabeçalho
         setTitle("Lista de Personagens");
         //Evitar de digitar uma listagem de personagens
         dao.salva(new Personagem("Ken", "02101985", "1,80"));
@@ -42,8 +42,9 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         //List<String> personagem = new ArrayList<>(Arrays.asList("Alex", "Ken", "Ryu"));
 
         //Chamar uma Activity para mandar para uma outra localidade
-        FloatingActionButton botaoNovoPersonagem = findViewById(R.id.fab_add);
-        botaoNovoPersonagem.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton botaoNovoPersonagem = findViewById(R.id.fab_add); //Fazer funcionar algo ao apertar e então identificar o floating Action Button pelo fab
+        botaoNovoPersonagem.setOnClickListener(new View.OnClickListener() { //Dar uma chamada
+            //Ao clicar ele ativa o Start Activity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class));
