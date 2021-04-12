@@ -2,7 +2,6 @@ package com.example.listapersonagens.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,8 +14,6 @@ import com.example.listapersonagens.dao.PersonagemDAO;
 import com.example.listapersonagens.model.Personagem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ListaPersonagemActivity extends AppCompatActivity {
@@ -37,10 +34,6 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         dao.salva(new Personagem("Ken", "02101985", "1,80"));
         dao.salva(new Personagem("Ryu", "02101985", "1,80"));
 
-
-
-        //List<String> personagem = new ArrayList<>(Arrays.asList("Alex", "Ken", "Ryu"));
-
         //Chamar uma Activity para mandar para uma outra localidade
         FloatingActionButton botaoNovoPersonagem = findViewById(R.id.fab_add); //Fazer funcionar algo ao apertar e então identificar o floating Action Button pelo fab
         botaoNovoPersonagem.setOnClickListener(new View.OnClickListener() { //Dar uma chamada
@@ -51,19 +44,10 @@ public class ListaPersonagemActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-        /*TextView primeiroPersonagem = findViewById(R.id.textView);
-        TextView segundoPersonagem = findViewById(R.id.textView2);
-        TextView terceiroPersonagem = findViewById(R.id.textView3);
-        primeiroPersonagem.setText(personagem.get(0));
-        segundoPersonagem.setText(personagem.get(1));
-        terceiroPersonagem.setText(personagem.get(2));*/
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume() { //Ele garante as informações do nosso projeto
         super.onResume();
 
         ListView listaDePersonagens = findViewById(R.id.activity_main_lista_personagem); //Exibe uma visualização verticalmmente onde cada visualização é exibido abaixo do anterior

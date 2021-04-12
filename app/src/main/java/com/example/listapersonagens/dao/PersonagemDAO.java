@@ -1,10 +1,9 @@
 package com.example.listapersonagens.dao;
 
 import com.example.listapersonagens.model.Personagem;
-import com.example.listapersonagens.ui.activities.ListaPersonagemActivity;
 
 import java.util.ArrayList;
-import java.util.List; //Importação da lista
+import java.util.List;
 
 
 

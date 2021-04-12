@@ -20,6 +20,10 @@ public class Personagem implements Serializable {
         this.nascimento = nascimento;
     }
 
+    public Personagem(){
+
+    }
+
     //Pegando as informações
     public String getNome() {
         return nome;
