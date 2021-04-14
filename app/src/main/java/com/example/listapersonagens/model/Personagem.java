@@ -4,7 +4,8 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
-public class Personagem implements Serializable {
+//Construtor das informações
+public class Personagem implements Serializable { //propagação das informações que vai ser inputado
     //Declarando as variáveis do construtor
     private String nome;
     private String altura;
@@ -20,7 +21,7 @@ public class Personagem implements Serializable {
         this.nascimento = nascimento;
     }
 
-    public Personagem(){
+    public Personagem() {
 
     }
 
@@ -52,20 +53,25 @@ public class Personagem implements Serializable {
 
     @NonNull
     @Override
-    public  String toString(){
-        return  nome;
+    public String toString() {
+        return nome;
     }
 
-  //Definir um local ou posição especificada
-    public void setId(int id){
+    //Definir um local ou posição especificada
+    public void setId(int id) {
 
         this.id = id;
     }
 
     //Receber um local ou posição especificada
-    public int getId(){
+    public int getId() {
 
         return id;
     }
+
+    public boolean IdValido() {
+        return id > 0;
+    }
+
 
 }

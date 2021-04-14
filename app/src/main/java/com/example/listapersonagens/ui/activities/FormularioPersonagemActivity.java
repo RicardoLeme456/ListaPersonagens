@@ -12,14 +12,18 @@ import com.example.listapersonagens.R;
 import com.example.listapersonagens.dao.PersonagemDAO;
 import com.example.listapersonagens.model.Personagem;
 
+import static com.example.listapersonagens.ui.activities.ConstantesActivities.CHAVE_PERSONAGEM;
+
 //Extender as informações e puxar da Superclasse
 public class FormularioPersonagemActivity extends AppCompatActivity {
 
+    public static final String TITULO_APPBAR_EDITA_PERSONAGEM = "Editar Personagen";
+    public static final String TITULO_APPBAR_NOVO_PERSONAGEM = "Novo Personagen";
     private EditText campoNome;
     private EditText campoNascimento;
     private EditText campoAltura;
     private final PersonagemDAO dao = new PersonagemDAO(); //Criar uma nova classe
-    private Personagem Personagem;
+    private Personagem personagem;
 
     //Buscar a Superclasse que esta na IDE
     @Override
@@ -28,21 +32,11 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState); //Criação da Activity para fazer as ações
         setContentView(R.layout.activity_formulario_personagem); //Setar um contexto para abrir uma view, tipo o lugar ou a posição especificada que ela vai estar
         //Definir o titulo associado a esta atividade no cabeçalho
-        setTitle("Formulário de Personagen");
         inicializacaoCampos();
         configuraçãoBotaoAddPersonagem();
+        carregaPersonagem();
 
-        //Puxa as informações e traz de volta
-        Intent dados = getIntent();
-        if(dados.hasExtra("Personagem")) {
-            Personagem personagem = (Personagem) dados.getSerializableExtra("personagem");  //Passar os parâmetros que estou buscando
-            campoNome.setText(personagem.getNome());
-            campoNascimento.setText(personagem.getNascimento());
-            campoAltura.setText(personagem.getAltura());
-        }else {
 
-            Personagem = new Personagem();
-        }
     }
 
     private void configuraçãoBotaoAddPersonagem() {
@@ -50,24 +44,40 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         botaoSalvar.setOnClickListener(new View.OnClickListener() { //Faz uma chamaga para fazer um instanciamento
             @Override
             public void onClick(View v) { //Criação da Superclasse
-                //Quamdo criar o OnClick ele vai receber as strings
-                String nome = campoNome.getText().toString();
-                String altura = campoAltura.getText().toString();
-                String nascimento = campoNascimento.getText().toString();
-
-                //Armazenar as informações e com isso cria a classe Personagem
-                Personagem persoangemSalvo = new Personagem(nome, altura, nascimento);
-
-                //Guardar as informações ou gravar as informações
-                dao.salva(persoangemSalvo);
-                finish();
-
-                persoangemSalvo.setNome(nome);
-                persoangemSalvo.setAltura(altura);
-                persoangemSalvo.setNascimento(nascimento);
-                dao.editar(persoangemSalvo); //Ele vai salvando as informações
+                finalizarFormulario();
             }
         });
+    }
+
+    private void finalizarFormulario() {
+        preencherPersonagem();
+        //Colocar a Validação
+        if (personagem.IdValido()) {
+            dao.editar(personagem);
+            finish();
+        }else {
+            dao.salva(personagem);
+        }
+        finish();
+    }
+
+    private void carregaPersonagem() {
+        //Puxa as informações e traz de volta
+        Intent dados = getIntent();
+        if (dados.hasExtra(CHAVE_PERSONAGEM)) {
+            setTitle(TITULO_APPBAR_EDITA_PERSONAGEM);
+            personagem = (Personagem) dados.getSerializableExtra(CHAVE_PERSONAGEM);  //Passar os parâmetros que estou buscando
+            preencherCampos();
+        } else {
+            setTitle(TITULO_APPBAR_NOVO_PERSONAGEM);
+            personagem = new Personagem();
+        }
+    }
+
+    private void preencherCampos() {
+        campoNome.setText(personagem.getNome());
+        campoNascimento.setText(personagem.getNascimento());
+        campoAltura.setText(personagem.getAltura());
     }
 
     private void inicializacaoCampos() {
@@ -75,5 +85,17 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         campoNome = findViewById(R.id.editText_nome);
         campoAltura = findViewById(R.id.editText_altura);
         campoNascimento = findViewById(R.id.editText_nascimento);
+    }
+
+    private void preencherPersonagem() {
+
+        //Quamdo criar o OnClick ele vai receber as strings
+        String nome = campoNome.getText().toString();
+        String altura = campoAltura.getText().toString();
+        String nascimento = campoNascimento.getText().toString();
+
+        personagem.setNome(nome);
+        personagem.setAltura(altura);
+        personagem.setNascimento(nascimento);
     }
 }
