@@ -39,6 +39,25 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
 
     }
 
+    private void carregaPersonagem() {
+        //Puxa as informações e traz de volta
+        Intent dados = getIntent();
+        if (dados.hasExtra(CHAVE_PERSONAGEM)) {
+            setTitle(TITULO_APPBAR_EDITA_PERSONAGEM);
+            personagem = (Personagem) dados.getSerializableExtra(CHAVE_PERSONAGEM);  //Passar os parâmetros que estou buscando
+            preencherCampos();
+        } else {
+            setTitle(TITULO_APPBAR_NOVO_PERSONAGEM);
+            personagem = new Personagem();
+        }
+    }
+
+    private void preencherCampos() {
+        campoNome.setText(personagem.getNome());
+        campoNascimento.setText(personagem.getNascimento());
+        campoAltura.setText(personagem.getAltura());
+    }
+
     private void configuraçãoBotaoAddPersonagem() {
         Button botaoSalvar = findViewById(R.id.button_salvar); //Método usado no lugar do OnClick
         botaoSalvar.setOnClickListener(new View.OnClickListener() { //Faz uma chamaga para fazer um instanciamento
@@ -61,24 +80,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         finish();
     }
 
-    private void carregaPersonagem() {
-        //Puxa as informações e traz de volta
-        Intent dados = getIntent();
-        if (dados.hasExtra(CHAVE_PERSONAGEM)) {
-            setTitle(TITULO_APPBAR_EDITA_PERSONAGEM);
-            personagem = (Personagem) dados.getSerializableExtra(CHAVE_PERSONAGEM);  //Passar os parâmetros que estou buscando
-            preencherCampos();
-        } else {
-            setTitle(TITULO_APPBAR_NOVO_PERSONAGEM);
-            personagem = new Personagem();
-        }
-    }
 
-    private void preencherCampos() {
-        campoNome.setText(personagem.getNome());
-        campoNascimento.setText(personagem.getNascimento());
-        campoAltura.setText(personagem.getAltura());
-    }
 
     private void inicializacaoCampos() {
         //Pegando as informações
