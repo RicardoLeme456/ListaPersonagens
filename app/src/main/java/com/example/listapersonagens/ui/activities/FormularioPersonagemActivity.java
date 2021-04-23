@@ -1,9 +1,12 @@
 package com.example.listapersonagens.ui.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +14,8 @@ import android.widget.EditText;
 import com.example.listapersonagens.R;
 import com.example.listapersonagens.dao.PersonagemDAO;
 import com.example.listapersonagens.model.Personagem;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import static com.example.listapersonagens.ui.activities.ConstantesActivities.CHAVE_PERSONAGEM;
 
@@ -24,6 +29,21 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     private EditText campoAltura;
     private final PersonagemDAO dao = new PersonagemDAO(); //Criar uma nova classe
     private Personagem personagem;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_formulario_personagem_menu_salvar,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if(itemId == R.id.activity_formulario_personagem_menu_salvar){
+            finalizarFormulario();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     //Buscar a Superclasse que esta na IDE
     @Override
@@ -52,6 +72,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         }
     }
 
+    //Onde os textos serão colocados
     private void preencherCampos() {
         campoNome.setText(personagem.getNome());
         campoNascimento.setText(personagem.getNascimento());
@@ -63,7 +84,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         botaoSalvar.setOnClickListener(new View.OnClickListener() { //Faz uma chamaga para fazer um instanciamento
             @Override
             public void onClick(View v) { //Criação da Superclasse
-                finalizarFormulario();
+                finalizarFormulario(); //Durante o clique finaliza o formulario
             }
         });
     }
@@ -72,12 +93,12 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         preencherPersonagem();
         //Colocar a Validação
         if (personagem.IdValido()) {
-            dao.editar(personagem);
-            finish();
+            dao.editar(personagem); //Editar o  dao personagem
+            finish(); //formulario editar finalizado
         }else {
-            dao.salva(personagem);
+            dao.salva(personagem); //Salva o dao personagem
         }
-        finish();
+        finish(); //Formulario salva finalizado
     }
 
 
@@ -87,6 +108,14 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         campoNome = findViewById(R.id.editText_nome);
         campoAltura = findViewById(R.id.editText_altura);
         campoNascimento = findViewById(R.id.editText_nascimento);
+
+        SimpleMaskFormatter smfAltura = new SimpleMaskFormatter("N,NN"); //Esqueleto da seleção de altura
+        MaskTextWatcher mtwAltura = new MaskTextWatcher(campoAltura, smfAltura); //A forma como vai ser visualizado no seu app
+        campoAltura.addTextChangedListener(mtwAltura); //Ao fazer alguma alteração ele sera escutado
+
+        SimpleMaskFormatter smfNascimento = new SimpleMaskFormatter("N/NN/NNNN"); //Esqueleto da seleção de nascimento
+        MaskTextWatcher mtwNascimento = new MaskTextWatcher(campoNascimento, smfNascimento); //A forma como vai ser visualizado no seu app
+        campoNascimento.addTextChangedListener(mtwNascimento); //Ao fazer alguma alteração ele sera escutado
     }
 
     private void preencherPersonagem() {
@@ -96,6 +125,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         String altura = campoAltura.getText().toString();
         String nascimento = campoNascimento.getText().toString();
 
+        //Onde os campos serão colocados
         personagem.setNome(nome);
         personagem.setAltura(altura);
         personagem.setNascimento(nascimento);
