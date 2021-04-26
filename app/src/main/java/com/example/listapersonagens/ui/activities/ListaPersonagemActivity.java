@@ -28,8 +28,8 @@ public class ListaPersonagemActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Lista de Personagens";
     //Mátodo sendo usado somente nessa classe
-    private final PersonagemDAO dao = new PersonagemDAO();
-    private ArrayAdapter<Personagem> adapter;
+    private final PersonagemDAO dao = new PersonagemDAO(); //Instanciar a classe personagem dao para a lista de personagens
+    private ArrayAdapter<Personagem> adapter; //Criar um adapter array da classe Personagem
 
     //Buscar a Superclasse que esta na IDE
     @Override
@@ -70,8 +70,9 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         adapter.addAll(dao.todos());  //Adiciona todas as listas de personagens
     }
 
+    //As listas que serão removidos do seu item
     private void remove(Personagem personagem) {
-        dao.remove(personagem);
+        dao.remove(personagem); //Remove as listas do
         adapter.remove(personagem);
     }
 

@@ -56,9 +56,10 @@ public class PersonagemDAO {
 
     }
 
+    //Método usado para remover algum dado errado ou que se arrependeu de ter usado
     public void remove(Personagem personagem){
         Personagem personagemDevolvido = buscaPersonagemId(personagem);
-        if(personagemDevolvido != null){
+        if(personagemDevolvido != null){ //Se os dados escolhidos é diferente de nulo ele removerá os itens
             personagens.remove(personagemDevolvido);
         }
     }

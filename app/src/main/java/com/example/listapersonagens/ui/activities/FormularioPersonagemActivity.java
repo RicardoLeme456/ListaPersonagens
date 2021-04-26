@@ -22,24 +22,26 @@ import static com.example.listapersonagens.ui.activities.ConstantesActivities.CH
 //Extender as informações e puxar da Superclasse
 public class FormularioPersonagemActivity extends AppCompatActivity {
 
-    public static final String TITULO_APPBAR_EDITA_PERSONAGEM = "Editar Personagen";
-    public static final String TITULO_APPBAR_NOVO_PERSONAGEM = "Novo Personagen";
-    private EditText campoNome;
+    public static final String TITULO_APPBAR_EDITA_PERSONAGEM = "Editar Personagen"; //O titulo do app
+    public static final String TITULO_APPBAR_NOVO_PERSONAGEM = "Novo Personagen"; //O titulo do app
+    private EditText campoNome;        //Declarando os Edit Texts do campo nome, altura e nascimento
     private EditText campoNascimento;
     private EditText campoAltura;
     private final PersonagemDAO dao = new PersonagemDAO(); //Criar uma nova classe
-    private Personagem personagem;
+    private Personagem personagem; //Pegando a classe Personagem
 
+    //Criação do menu salvar no formulário
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_formulario_personagem_menu_salvar,menu);
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.activity_formulario_personagem_menu_salvar,menu); //Pegar os dados editados para ser salvos
+        return super.onCreateOptionsMenu(menu); //Retorna os dados fornecidos para a classe
     }
 
+    //Nos respectivos itens selecionados
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int itemId = item.getItemId();
-        if(itemId == R.id.activity_formulario_personagem_menu_salvar){
+        int itemId = item.getItemId(); //Pegar os itens através dos seus id's
+        if(itemId == R.id.activity_formulario_personagem_menu_salvar){ //Se o id do item for aquele informado o método sera chamado
             finalizarFormulario();
         }
         return super.onOptionsItemSelected(item);
