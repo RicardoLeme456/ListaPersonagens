@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.listapersonagens">
 
+    //Local para fazer a modificação
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,16 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ListaPersonagens">
-      <activity android:name=".ui.activities.FormularioPersonagemActivity">
+      <activity android:name=".ui.activities.FormularioPersonagemActivity"/> //Criado o Activity FormularioPersonagemActivity
+        <activity android:name=".ui.activities.ListaPersonagemActivity"> //Aprimeira coisa a aparecer
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ui.activities.ListaPersonagemActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" /> //uma ação a ser colocada
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
